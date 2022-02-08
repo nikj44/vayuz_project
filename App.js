@@ -1,19 +1,30 @@
-import { View, Text } from 'react-native';
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Home from './src/screens/Home';
+import ImageScreen from './src/screens/ImageScreen';
 
 const App = () => {
-fetch('https://dog.ceo/api/breeds/image/random')
-.then((response) => response.json())
-.then((json) => {
-  return json
-})
-console.log(json)
+
+  const Stack = createStackNavigator();
+
+  const MyStack = () => {
+  return(
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} options={{headerTitle: 'Home', headerTitleAlign: 'center'}} />
+      <Stack.Screen name="ImageScreen" component={ImageScreen}  options={{headerTitle: 'Image Screen', headerTitleAlign: 'center'}}/>
+    </Stack.Navigator>
+  )
+}
 
   return (
-    <View>
-      <Text>Hi</Text>
-    </View>
-  );
+    // <GestureHandlerRootView>
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+    // </GestureHandlerRootView>
+    
+  );  
 };
 
 export default App;
